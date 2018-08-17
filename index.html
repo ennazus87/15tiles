@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <!-- <script type="text/javascript" src="game.js"></script> -->
+    <script type="text/javascript" src="Board.js"></script>
+    <script>
+        function initGame() {
+            let r = document.getElementById("rows").value;
+            let c = document.getElementById("cols").value;
+            let b = new Board(r, c);
+            
+            b.createBoardArray();
+            b.shuffle();
+            b.renderBoard();
+
+            document.onkeydown = function(e) {
+                switch (e.keyCode) {
+                    case 37:
+                        b.moveLeft();
+                        b.validate();
+                        b.resetScript();
+                        var elem = document.getElementById("game-table");
+                        elem.parentNode.removeChild(elem);
+                        break;
+                    case 38:
+                        b.moveUp();
+                        b.validate();
+                        b.resetScript();
+                        var elem = document.getElementById("game-table");
+                        elem.parentNode.removeChild(elem);
+                        break;
+                    case 39:
+                        b.moveRight();
+                        b.validate();
+                        b.resetScript();
+                        var elem = document.getElementById("game-table");
+                        elem.parentNode.removeChild(elem);
+                        break;
+                    case 40:
+                        b.moveDown();
+                        b.validate();
+                        b.resetScript();
+                        var elem = document.getElementById("game-table");
+                        elem.parentNode.removeChild(elem);
+                        break;
+                }
+            };
+        };
+    </script>
+    <title>FIFTEEN</title>
+</head>
+<body>
+    <div id='the-game'>
+        <div id='container'></div>
+        <br>
+        <br>
+        <label>Rows: </label><input type="text" id="rows" name="rows">
+        <label>Cols: </label><input type="text" id="cols" name="cols">
+
+        <div id="stephen">
+        </div>
+
+        <button onclick="initGame()">Start Game</button>
+    </div>
+</body>
+</html>
+
+<!-- http://robinsonprogramming.com/tuts/?page=tutorials_javascript_$_fifteen_puzzle -->

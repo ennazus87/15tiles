@@ -1,0 +1,23 @@
+
+.container {
+    min-height: 300px;
+    min-width: 300px;
+    
+}
+
+td {
+    height: 50px;
+    width: 50px;
+    border: 1px grey solid;
+    border-radius: 5px;
+    margin: 2px;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+
+td.blank {
+    border: none;
+    cursor: default;
+    font-size: 0;
+}
