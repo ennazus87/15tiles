@@ -1,22 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Carrois+Gothic+SC');
 
-.container {
-    min-height: 300px;
-    min-width: 300px;
-    
+h1 {
+    font-family: 'Carrois Gothic SC', sans-serif;
+    font-size: 64px;
+    text-align: center;
+}
+
+#settings {
+    height: auto;
+    width: 50%;
+    background-color: #eae8e8;
+    padding: 30px 0px 30px 0px;
+    margin: 0px auto 30px auto;
+    text-align: center;
+    font-family: 'Carrois Gothic SC', sans-serif;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 60%;
+    height: 5px;
+    display: block;
+    margin: 20px auto 20px auto;
+    background: #b2b0b0;
+    outline: none;
+    border-radius: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #f01313;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background-color: #d81111;
+}
+
+.slider-output {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+  
+input.tile-size {
+    display:none;
+}
+  
+.slider {
+    /* position: relative; */
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #f01313;
+}
+  
+/* input:focus + .slider {
+    box-shadow: 0 0 1px #f01313;
+} */
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.start {
+    background-color: #f01313;
+    border: none;
+    color: white;
+    font-family: 'Carrois Gothic SC', sans-serif;
+    font-size: 16px;
+    padding: 15px 30px;
+    margin: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: 0;
+}
+
+.start:hover {
+    background-color: #d81111;
+}
+
+#container {
+    /* width: auto; */
+    text-align: center;
+    font-family: 'Carrois Gothic SC', sans-serif;
+}
+
+#game-table {
+    margin: 0px auto;
+    /* max-width: 300px; */
 }
 
 td {
     height: 50px;
-    width: 50px;
+    min-width: 50px;
+    /* background-color: #dbd7d7; */
     border: 1px grey solid;
     border-radius: 5px;
     margin: 2px;
     vertical-align: middle;
+    font-family: 'Carrois Gothic SC', sans-serif;
     text-align: center;
+    color: #f01313;
     cursor: pointer;
 }
 
 td.blank {
+    opacity: 0;
     border: none;
     cursor: default;
     font-size: 0;

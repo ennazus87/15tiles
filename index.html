@@ -9,64 +9,88 @@
     <script type="text/javascript" src="Board.js"></script>
     <script>
         function initGame() {
+            let elem = document.getElementById("game-table");
+            elem.parentNode.removeChild(elem);
+    
             let r = document.getElementById("rows").value;
             let c = document.getElementById("cols").value;
             let b = new Board(r, c);
-            
+
             b.createBoardArray();
-            b.shuffle();
+            b.shuffle(); 
             b.renderBoard();
+            
 
             document.onkeydown = function(e) {
                 switch (e.keyCode) {
                     case 37:
                         b.moveLeft();
-                        b.validate();
-                        b.resetScript();
-                        var elem = document.getElementById("game-table");
-                        elem.parentNode.removeChild(elem);
                         break;
                     case 38:
                         b.moveUp();
-                        b.validate();
-                        b.resetScript();
-                        var elem = document.getElementById("game-table");
-                        elem.parentNode.removeChild(elem);
                         break;
                     case 39:
                         b.moveRight();
-                        b.validate();
-                        b.resetScript();
-                        var elem = document.getElementById("game-table");
-                        elem.parentNode.removeChild(elem);
                         break;
                     case 40:
                         b.moveDown();
-                        b.validate();
-                        b.resetScript();
-                        var elem = document.getElementById("game-table");
-                        elem.parentNode.removeChild(elem);
                         break;
                 }
+                
+                b.resetScript();
+                b.validate();
             };
-        };
+            
+        };       
     </script>
     <title>FIFTEEN</title>
 </head>
 <body>
-    <div id='the-game'>
-        <div id='container'></div>
-        <br>
-        <br>
-        <label>Rows: </label><input type="text" id="rows" name="rows">
-        <label>Cols: </label><input type="text" id="cols" name="cols">
-
-        <div id="stephen">
+    <div class='the-game'>     
+        <h1>TILES</h1>
+        <div id="settings">
+            <label>ROWS </label>
+            <br>
+            <input type="range" min="1" max="25" value="4" id="rows" name="rows" class="slider"> 
+            <br>
+            <label>COLUMNS </label>
+            <br>
+            <input type="range" min="1" max="25" value="4" id="cols" name="cols" class="slider">
+            <br>
+            <label class="switch">
+                <input class="tile-size" type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <br>
+            <span id='row-slider-output'>4</span> X <span id='col-slider-output'>4</span>
+            <br>
+            <button class='start' onclick="initGame()">START GAME</button>
         </div>
-
-        <button onclick="initGame()">Start Game</button>
+        <div id='container'>
+            <div id="game-table">
+            </div>
+        </div>
     </div>
 </body>
+
+<script>
+    let rowSlider = document.getElementById("rows");
+    let colSlider = document.getElementById("cols");
+
+    var rowOutput = document.getElementById("row-slider-output");
+    let colOutput = document.getElementById("col-slider-output");
+    
+    rowOutput.innerHTML = rowSlider.value;
+    colOutput.innerHTML = colSlider.value;
+
+    rowSlider.oninput = function() {
+        rowOutput.innerHTML = this.value;
+    }
+
+    colSlider.oninput = function() {
+        colOutput.innerHTML = this.value;
+    }
+</script>
 </html>
 
 <!-- http://robinsonprogramming.com/tuts/?page=tutorials_javascript_$_fifteen_puzzle -->
