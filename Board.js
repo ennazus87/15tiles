@@ -47,7 +47,30 @@ class Board {
 
             for (var j = 0; j < this.col; j++) {
                 let td = document.createElement('td');
-                td.innerHTML = tile[j]
+                td.innerHTML = tile[j];
+
+                td.addEventListener('click', event => {
+                    const number = ~~event.target.innerHTML;
+                    const neighbours = this.getNeighbours();
+
+                    for (var direction in neighbours) {
+                        if (number === neighbours[direction]) {
+                            const funcname = `move${direction.charAt(0).toUpperCase() + direction.slice(1)}`;
+                            this[funcname]();
+                            // if (direction === 'down') {
+                            //     this.moveDown()
+                            // }
+                        }
+                    }
+
+                    this.resetScript();
+                    this.validate();
+
+                    console.log(this.getNeighbours());
+                    console.log(event.target);
+                    
+                });
+
 
                 if (tile[j] == 0) {
                     td.classList.add('blank');
@@ -67,6 +90,37 @@ class Board {
             document.getElementById('container').appendChild(table);
             this.scriptAdded = true;
         }
+    }
+
+    getNeighbours() {
+        const result = {};
+
+        if (this.blank.y-1 >= 0) {
+            result.down = this.gameBoard[this.blank.y-1][this.blank.x];
+        }
+        if (this.blank.y+1 <= (~~this.row) -1) {
+            result.up  = this.gameBoard[this.blank.y+1][this.blank.x];
+        }
+        if (this.blank.x-1 >= 0) {
+            result.right = this.gameBoard[this.blank.y][this.blank.x-1];
+        }
+        if (this.blank.x+1 <= (~~this.col) -1) {
+            result.left  = this.gameBoard[this.blank.y][this.blank.x+1];
+        }
+        //const left = this.gameBoard[this.blank.y][this.blank.x-1];
+        // right = this.gameBoard[this.blank.y][this.blank.x+1];
+        
+        // if (bottom !== undefined) {
+            
+        // } 
+        // if (left !== undefined) {
+        //     result.left = left;
+        // } 
+        // if (right !== undefined) {
+        //     result.right = right;
+        // }
+
+        return result;
     }
 
     //the moves
@@ -130,7 +184,7 @@ class Board {
     //this shuffle is optimised to ensure that even really large boards are shuffled. 
     shuffle() {
         let numberOfShuffles = (Math.pow(this.row, 2) * (Math.pow(this.col, 2)));
-        console.log(numberOfShuffles);
+        console.log("# of shuffles: " + numberOfShuffles);
 
         //optimising shuffle
         let banned = 3; 
@@ -189,11 +243,14 @@ class Board {
         }
 
         winner = board.slice(0)
-        winner.sort(function(a, b) {
-            return a - b;
-        });
-
-        winner = winner.filter(function(e) { return e !== 0 })
+        
+        // winner.sort(function(a, b) {
+        //     return a - b;
+        // });
+        winner.sort((a,b) => a-b);
+        
+        // winner = winner.filter(function(e) { return e !== 0 })
+        winner = winner.filter(e => e !== 0);
         winner.push(0)
 
         // console.log('board: ' + board);
